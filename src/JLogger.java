@@ -13,66 +13,95 @@ public class JLogger {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
     LocalDateTime now;
 
-    public JLogger(String logPath) throws IOException {
+
+    public JLogger(String logPath){
         
-        logFile = new File(logPath);
-        if (logFile.createNewFile()) {
-            writer = new BufferedWriter(new FileWriter(logFile.getPath()));
-            DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            now = LocalDateTime.now();
-            writer.write("New log file created successfully on " + dtf2.format(now) +" :");
-            writer.flush();
-            System.out.println("New log created successfully on " + dtf2.format(now) +" :");
+        try {
+            logFile = new File(logPath);
+            if (logFile.createNewFile()) {
+                writer = new BufferedWriter(new FileWriter(logFile.getPath()));
+                DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                now = LocalDateTime.now();
+                writer.write("New log file created successfully on " + dtf2.format(now) + " :");
+                writer.flush();
+                System.out.println("New log created successfully on " + dtf2.format(now) + " :");
+            }
+        } catch (IOException ignored) {
+
         }
 
     }
 
-    public void fatal(String s) throws IOException {
+    public void fatal(String s) {
 
-        now = LocalDateTime.now();
-        writer.write("\n[" + dtf.format(now) + "] [FATAL/" + getCallerClassName() + "] " + s);
-        writer.flush();
-        System.out.println("[" + dtf.format(now) + "] [FATAL/" + getCallerClassName() + "] " + s);
+        try {
+            now = LocalDateTime.now();
+            writer.write("\n[" + dtf.format(now) + "] [FATAL/" + getCallerClassName() + "] " + s);
+            writer.flush();
+            System.out.println("[" + dtf.format(now) + "] [FATAL/" + getCallerClassName() + "] " + s);
+        } catch (IOException ignored) {
 
-    }
-    public void error(String s) throws IOException {
-
-        now = LocalDateTime.now();
-        writer.write("\n[" + dtf.format(now) + "] [ERROR/" + getCallerClassName() + "] " + s);
-        writer.flush();
-        System.out.println("[" + dtf.format(now) + "] [ERROR/" + getCallerClassName() + "] " + s);
+        }
 
     }
-    public void warning(String s) throws IOException {
+    public void error(String s) {
 
-        now = LocalDateTime.now();
-        writer.write("\n[" + dtf.format(now) + "] [WARNING/" + getCallerClassName() + "] " + s);
-        writer.flush();
-        System.out.println("[" + dtf.format(now) + "] [WARNING/" + getCallerClassName() + "] " + s);
+        try {
+            now = LocalDateTime.now();
+            writer.write("\n[" + dtf.format(now) + "] [ERROR/" + getCallerClassName() + "] " + s);
+            writer.flush();
+            System.out.println("[" + dtf.format(now) + "] [ERROR/" + getCallerClassName() + "] " + s);
+        } catch (IOException ignored) {
 
-    }
-    public void info(String s) throws IOException {
-
-        now = LocalDateTime.now();
-        writer.write("\n[" + dtf.format(now) + "] [INFO/" + getCallerClassName() + "] " + s);
-        writer.flush();
-        System.out.println("[" + dtf.format(now) + "] [INFO/" + getCallerClassName() + "] " + s);
+        }
 
     }
-    public void debug(String s) throws IOException {
+    public void warning(String s) {
 
-        now = LocalDateTime.now();
-        writer.write("\n[" + dtf.format(now) + "] [DEBUG/" + getCallerClassName() + "] " + s);
-        writer.flush();
-        System.out.println("[" + dtf.format(now) + "] [DEBUG/" + getCallerClassName() + "] " + s);
+        try {
+            now = LocalDateTime.now();
+            writer.write("\n[" + dtf.format(now) + "] [WARNING/" + getCallerClassName() + "] " + s);
+            writer.flush();
+            System.out.println("[" + dtf.format(now) + "] [WARNING/" + getCallerClassName() + "] " + s);
+        } catch (IOException ignored) {
+
+        }
 
     }
-    public void trace(String s) throws IOException {
+    public void info(String s) {
 
-        now = LocalDateTime.now();
-        writer.write("\n[" + dtf.format(now) + "] [TRACE/" + getCallerClassName() + "] " + s);
-        writer.flush();
-        System.out.println("[" + dtf.format(now) + "] [TRACE/" + getCallerClassName() + "] " + s);
+        try {
+            now = LocalDateTime.now();
+            writer.write("\n[" + dtf.format(now) + "] [INFO/" + getCallerClassName() + "] " + s);
+            writer.flush();
+            System.out.println("[" + dtf.format(now) + "] [INFO/" + getCallerClassName() + "] " + s);
+        } catch (IOException ignored) {
+
+        }
+
+    }
+    public void debug(String s) {
+
+        try {
+            now = LocalDateTime.now();
+            writer.write("\n[" + dtf.format(now) + "] [DEBUG/" + getCallerClassName() + "] " + s);
+            writer.flush();
+            System.out.println("[" + dtf.format(now) + "] [DEBUG/" + getCallerClassName() + "] " + s);
+        } catch (IOException ignored) {
+
+        }
+
+    }
+    public void trace(String s) {
+
+        try {
+            now = LocalDateTime.now();
+            writer.write("\n[" + dtf.format(now) + "] [TRACE/" + getCallerClassName() + "] " + s);
+            writer.flush();
+            System.out.println("[" + dtf.format(now) + "] [TRACE/" + getCallerClassName() + "] " + s);
+        } catch (IOException ignored) {
+
+        }
 
     }
 
