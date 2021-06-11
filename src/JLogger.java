@@ -105,7 +105,7 @@ public class JLogger {
 
     }
 
-    public static String getCallerClassName() {
+    private static String getCallerClassName() {
         StackTraceElement[] stElements = Thread.currentThread().getStackTrace();
         for (int i=1; i<stElements.length; i++) {
             StackTraceElement ste = stElements[i];
